@@ -42,7 +42,7 @@
             context: .
             dockerfile: Dockerfile
             push: false
-            tags: ${{ secrets.DOCKER_HUB_USERNAME }}/recipe:v1.0.0
+            tags: ${{ secrets.DOCKER_HUB_USERNAME }}/bankapplication:v1.0.0
 
        - name: login to docker hub
          uses: docker/login-action@v1
@@ -55,5 +55,5 @@
          with:
             context: .
             dockerfile: Dockerfile
-            push: true
-            tags: ${{ secrets.DOCKER_HUB_USERNAME }}/recipe:v1.0.0  
+            push: true            
+            tags: ${{ secrets.DOCKER_HUB_USERNAME }}/bankapplication:v1.0.0  
