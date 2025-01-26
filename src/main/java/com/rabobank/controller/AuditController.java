@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.rabobank.service.AuditService;
 
-/**
- * 
- */
+
 @RestController
 @RequestMapping("/api/accounts/audit")
 @EnableMethodSecurity
