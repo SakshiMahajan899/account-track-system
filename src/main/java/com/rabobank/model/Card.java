@@ -2,9 +2,7 @@ package com.rabobank.model;
 
 import java.time.LocalDate;
 
-import org.springframework.stereotype.Component;
-
-import com.rabobank.constants.CardType;
+import com.rabobank.util.CardType;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.rabobank.constants;
+package com.rabobank.util;
 
 
 

@@ -1,4 +1,4 @@
-package com.rabobank.utils;
+package com.rabobank.util;
 
 
 import org.springframework.stereotype.Component;
