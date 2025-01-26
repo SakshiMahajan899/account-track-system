@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.rabobank</groupId>
-	<artifactId>account-track-system</artifactId>
+	<artifactId>bank-application</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>account-track-system</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Bank project using Spring Boot</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -70,6 +70,12 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+		    </dependency>
+		
 	</dependencies>
 
 	<build>

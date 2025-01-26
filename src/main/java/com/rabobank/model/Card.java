@@ -29,4 +29,21 @@ public class Card {
 	@ManyToOne
     @JoinColumn(name = "account_id", nullable = false)
     private Account account;
+	public Long getId() {
+		return id;
+	}
+	public String getCardNumber() {
+		return cardNumber;
+	}
+	public LocalDate getExpiryDate() {
+		return expiryDate;
+	}
+	public CardType getCardType() {
+		return cardType;
+	}
+	public Account getAccount() {
+		return account;
+	}
+	
+	
 }

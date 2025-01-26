@@ -18,10 +18,14 @@ import lombok.Data;
 @Data
 @Entity
 public class Account {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long accountNumber;
-//	private String accountNumber;
+public Long getAccountNumber() {
+		return accountNumber;
+	}
+	//	private String accountNumber;
 	private BigDecimal balance;
 	@OneToOne
     @JoinColumn(name = "customer_id")
