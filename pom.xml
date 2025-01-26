@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.rabobank</groupId>
-	<artifactId>account-track-system</artifactId>
+	<artifactId>bank-application</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>account-track-system</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Bank project using Spring Boot</description>
 	<url/>
 	<licenses>
 		<license/>
