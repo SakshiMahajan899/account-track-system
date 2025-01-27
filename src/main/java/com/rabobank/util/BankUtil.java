@@ -3,8 +3,12 @@ package com.rabobank.util;
 
 import org.springframework.stereotype.Component;
 
-@Component
 public class BankUtil {
+	
+	  private BankUtil() {
+		    throw new IllegalStateException("Utility class");
+		  }
+
 	public static String maskNumber(Long number) {
         String numberStr = String.valueOf(number);
         int length = numberStr.length();

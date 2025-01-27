@@ -22,15 +22,17 @@ public class Account {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long accountNumber;
-public Long getAccountNumber() {
-		return accountNumber;
-	}
-	//	private String accountNumber;
 	private BigDecimal balance;
 	@OneToOne
     @JoinColumn(name = "customer_id")
-	private Customer customer_id; 
+	private Customer customer; 
 	
+	public Customer getCustomer() {
+		return customer;
+	}
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
 	@OneToMany(mappedBy = "account", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Card> cards;
 	/**
@@ -45,5 +47,8 @@ public Long getAccountNumber() {
 	public void setBalance(BigDecimal subtract) {
 		this.balance = subtract;
 		
+	}
+	public Long getAccountNumber() {
+		return this.accountNumber;
 	}
 }

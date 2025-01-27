@@ -9,6 +9,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rabobank.service.AuditService;
@@ -21,7 +22,7 @@ public class AuditController {
 	 // Endpoint to get transaction logs
     @GetMapping("/logs")
     @PreAuthorize("hasAuthority('SCOPE_admin.audit')")
-    public List<String> getTransactionLogs() {
-        return AuditService.getTransactionLogs();
+    public List<String> getTransactionLogs(@RequestParam String transactionType ) {
+        return AuditService.getTransactionLogs(transactionType);
     }
 }

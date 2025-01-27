@@ -18,6 +18,6 @@ public class Customer {
 	private String name; 
 	private String email;
 	private String phoneNumber;
-	@OneToOne(mappedBy = "customer_id", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToOne(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Account account;
 }

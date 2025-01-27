@@ -8,6 +8,6 @@ import java.math.BigDecimal;
 /**
  * 
  */
-public abstract class CardChargeProcessor {
+public abstract class PaymentMethod {
 	  public abstract BigDecimal applyCharges(BigDecimal amount);
 }

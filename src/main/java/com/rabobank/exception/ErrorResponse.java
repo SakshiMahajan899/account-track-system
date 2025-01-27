@@ -2,22 +2,22 @@ package com.rabobank.exception;
 
 import org.springframework.http.HttpStatus;
 
-public class Error {
-    private int errorCode;
+public class ErrorResponse {
+    private String errorCode;
     private HttpStatus status;
     private String message;
 
-    public Error(int errorCode, HttpStatus status, String message) {
+    public ErrorResponse(String errorCode, HttpStatus status, String message) {
         this.errorCode = errorCode;
         this.status = status;
         this.message = message;
     }
 
-    public int getErrorCode() {
+    public String getErrorCode() {
         return errorCode;
     }
 
-    public void setErrorCode(int errorCode) {
+    public void setErrorCode(String errorCode) {
         this.errorCode = errorCode;
     }
 

@@ -1,12 +1,12 @@
-package com.rabobank.model;
+package com.rabobank.dto;
 
 import java.math.BigDecimal;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-@Entity
-public class AccountModel {
-	@Id
+
+public class AccountDto {
+	
 	private Long fromAccountNumber;
 	
     private Long toAccountNumber;
