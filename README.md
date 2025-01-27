@@ -64,108 +64,101 @@ To secure the Application endpoints, keystore.p12 is placed in the resources fol
  
 
 ## API Endpoints
+All Request is https enabled and Authorization token is provided in the Header parameters.
 
 ###  Available balance in all accounts
 
-- **URL:** `/api/accounts/balance`
+- **URL:** `https://localhost:8443/api/accounts/balance`
 - **Method:** `POST`
-- **Description:** Retrieve a list of all recipes.
+- **Description:** Retrieve balance available in all accounts. 
 - **Response:**
   ```json
-  [
-     {
-        "id": 1,
-        "name": "Chicken Alfredo",
-        "ingredients": [
-            "chicken, fettuccine, cream, parmesan, garlic"
-        ],
-        "servings": 2,
-        "instructions": "Cook fettuccine. In a separate pan, sauté garlic, then add cream and cheese. Add cooked chicken and fettuccine.",
-        "vegetarian": false
-    }
-  ]
+  {
+    "12345": 5000.00,
+    "67890": 5000.00
+}
+![image](https://github.com/user-attachments/assets/3d292d6e-aae9-4662-9368-34fba6f85685)
 
-### withdraw money
 
-- **URL:** `/api/recipes`
+### Withdraw money
+
+- **URL:** `https://localhost:8443/api/accounts/withdraw`
 - **Method:** `POST`
-- **Description:** Add a new recipe to the collection..
+- **Description:** Withdraw money from the account.
 - **Request Body:**
   ```json
   {
-        "name": "Spaghetti Bolognese",
-        "ingredients": [
-            "spaghetti",
-           "tomato sauce"
-           ],
-        "servings": 2,
-        "instructions": "Cook spaghetti. Mix with tomato sauce. Combine and serve",
-        "vegetarian": true
-    }
+    "fromAccountNumber": 2,
+    "amount": 50,
+    "cardType": "DEBIT"
+}
 - **Response:**
   ```json
   {
-    "id": 4,
-    "name": "Spaghetti Bolognese",
-    "ingredients": [
-        "spaghetti",
-        "tomato sauce"
-    ],
-    "servings": 2,
-    "instructions": "Cook spaghetti. Mix with tomato sauce. Combine and serve",
-    "vegetarian": true
-   }
+    "message": "Withdraw Done",
+    "status": "OK",
+    "code": 200
+}
+![image](https://github.com/user-attachments/assets/bbefcf34-998e-43e5-a56a-a7407c6f72d6)
+
 
 
 ###  Transfer money
 
-- **URL:** `/api/recipes/:id`
-- **Method:** `PUT`
-- **Description:** Update an existing recipe by its ID.
+- **URL:** `https://localhost:8443/api/accounts/transfer`
+- **Method:** `POST`
+- **Description:** Transfer Money from one account to another.
 - **Request Body:**
   ```json
   {
-    "name": "Potato Gratin",
-    "ingredients": [
-        "potatoes, cream, cheese, garlic, thyme"
-    ],
-    "servings": 4,
-    "instructions": "Layer potatoes with cream and cheese, bake until golden and bubbly.",
-    "vegetarian": true
-   }
+    "fromAccountNumber": 67890,
+    "amount": 500,
+    "cardType": "CREDIT",
+    "toAccountNumber": 12345
+}
 - **Response:**
   ```json
-  {
-    "id": 1,
-    "name": "Potato Gratin",
-    "ingredients": [
-        "potatoes, cream, cheese, garlic, thyme"
-    ],
-    "servings": 4,
-    "instructions": "Layer potatoes with cream and cheese, bake until golden and bubbly.",
-    "vegetarian": true
-   }
+ {
+    "message": "Transfer Done",
+    "status": "OK",
+    "code": 200
+}
+![image](https://github.com/user-attachments/assets/cb8ab3f6-a87e-47eb-8577-a9a4287554ce)
 
 
 
 ### audit transfers or withdrawals
 
-- **URL:** `/api/recipes/filter`
+- **URL:** `https://localhost:8443/api/accounts/audit/logs`
 - **Method:** `GET`
-- **Description:** Retrieve all vegetarian recipes.
-- **Query Parameter:** `vegetarian=true`
+- **Description:** Retrieve all transaction logs of type TRANSFER.
+- **Query Parameter:** `transactionType=TRANSFER`
 - **Response:**
   ```json
-  [
-    {
-      "id": 1,
-      "name": "Vegetable Stir Fry",
-      "ingredients": ["broccoli", "carrots", "bell peppers", "soy sauce"],
-      "servings": 2,
-      "instructions": "Stir fry vegetables in a pan with soy sauce.",
-      "vegetarian": true,
-    }
+ [
+    "Timestamp: 1738021921735 |Transferred 500 from e2217d3e4e120c6a3372a1890f03e232b35ad659d71f7a62501a4ee204a3e66d to 5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5",
+    "Timestamp: 1738021928672 |Transferred 500 from d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35 to 5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5",
+    "Timestamp: 1738021942151 |Transferred 37 from 5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5 to d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35"
   ]
+
+![image](https://github.com/user-attachments/assets/0d049d9f-1a69-47c3-84d8-214b6190c724)
+
+
+### Audit for withdrawals
+
+- **URL:** `https://localhost:8443/api/accounts/audit/logs`
+- **Method:** `GET`
+- **Description:** Retrieve all transaction logs of type WITHDRAW.
+- **Query Parameter:** `transactionType=WITHDRAW`
+- **Response:**
+  ```json
+ [
+    "Timestamp: 1738021921735 |Withdrawn 500 from e2217d3e4e120c6a3372a1890f03e232b35ad659d71f7a62501a4ee204a3e66d",
+    "Timestamp: 1738021928672 |Withdrawn 500 from d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35 ",
+    "Timestamp: 1738021942151 |Withdrawn 37 from 5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5 "
+  ]
+
+![image](https://github.com/user-attachments/assets/0d049d9f-1a69-47c3-84d8-214b6190c724)
 
 
 
