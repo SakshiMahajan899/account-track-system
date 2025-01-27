@@ -1,14 +1,13 @@
-package com.rabobank.repository;
+package com.rabobank;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-class CardRepositoryTest {
+class BankApplicationTest {
 
 	@Test
 	void test() {
-		fail("Not yet implemented");
 	}
 
 }

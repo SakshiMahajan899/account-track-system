@@ -25,7 +25,7 @@ public class FunctionalException extends RuntimeException {
 	 * @param message   the detail message providing more information about the
 	 *                  exception.
 	 */
-	public FunctionalException(String errorCode, String message) {
+	public FunctionalException(String code, String message) {
 		super(message); // Pass the message to the parent class (Exception)
 		this.code = code;
 	}
