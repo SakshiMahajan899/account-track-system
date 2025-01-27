@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS customer (
     phone_number VARCHAR(255) NOT NULL
 );
 CREATE TABLE IF NOT EXISTS account (
-    account_number BIGINT AUTO_INCREMENT PRIMARY KEY,
+    account_number VARCHAR(255) PRIMARY KEY,
     balance BIGINT NOT NULL,
     customer_id BIGINT,
     FOREIGN KEY (customer_id) REFERENCES customer(id)
@@ -15,7 +15,6 @@ CREATE TABLE IF NOT EXISTS card (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     card_number VARCHAR(255) NOT NULL,
     card_type VARCHAR(255) NOT NULL,
---    balance DOUBLE NOT NULL,
     expiry_date DATE NOT NULL,
     account_id BIGINT,
     FOREIGN KEY (account_id) REFERENCES account(account_number)
@@ -26,12 +25,14 @@ CREATE TABLE IF NOT EXISTS card (
 INSERT INTO customer (id, name, email, phone_number)
 VALUES (1, 'John Doe', 'johndoe@example.com', '123-456-7890');
 INSERT INTO account (account_number, balance, customer_id)
-VALUES (1, 5000.0, 1);
+VALUES (12345, 5000.0, 1);
+INSERT INTO account (account_number, balance, customer_id)
+VALUES (67890, 5000.0, 1);
 -- The customer_id should match the ID of the inserted user
 INSERT INTO card (id, card_number, card_type, expiry_date, account_id)
-VALUES (1, '1111-2222-3333-4444', 'DEBIT', '2027-06-30',1);
+VALUES (1, '1111-2222-3333-4444', 'DEBIT', '2027-06-30',12345);
 INSERT INTO card (id, card_number, card_type, expiry_date, account_id)
-VALUES (2, '5555-6666-7777-8888', 'CREDIT', '2027-06-30',1);
+VALUES (2, '5555-6666-7777-8888', 'CREDIT', '2027-06-30',12345);
 
 
 

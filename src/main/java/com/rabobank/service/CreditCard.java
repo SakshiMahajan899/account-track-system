@@ -1,14 +1,14 @@
 /**
- * 
+ *
  */
 package com.rabobank.service;
 
 import java.math.BigDecimal;
 
 /**
- * 
+ *
  */
-public class CreditCardChargeProcessor extends CardChargeProcessor {
+public class CreditCard extends PaymentMethod {
 
 	@Override
 	public BigDecimal applyCharges(BigDecimal amount) {

@@ -21,8 +21,17 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+       
 
 server:
-  port: 8081
+  port: 8443
+  
+  # Configure SSL
+#  ssl:
+#    key-store: classpath:keystore.p12
+#    key-store-password: "$2a$12$V/vMHom7B71tk7WFU2k1l.p.iNMmIVVP/nS.5xktfI4kJLNrmsJvy"
+#    key-store-type: PKCS12
+#    key-alias: mykey
+
         
   
