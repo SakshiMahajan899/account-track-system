@@ -1,0 +1,125 @@
+openapi: 3.0.3
+info:
+  title: Account Service API
+  version: 1.0.0
+  description: API for managing account operations and transaction logs.
+servers:
+  - url: /api/accounts
+paths:
+  /balance:
+    post:
+      summary: Get the balance for all accounts of a given customer
+      security:
+        - bearerAuth: []
+      tags:
+        - Accounts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerDto'
+      responses:
+        '200':
+          description: A map containing account numbers and their balances
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+  /withdraw:
+    post:
+      summary: Withdraw an amount from an account using a specified card type
+      security:
+        - bearerAuth: []
+      tags:
+        - Accounts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountDto'
+      responses:
+        '200':
+          description: Successful withdraw response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseDto'
+  /transfer:
+    post:
+      summary: Transfer an amount from one account to another using a specified card type
+      security:
+        - bearerAuth: []
+      tags:
+        - Accounts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountDto'
+      responses:
+        '200':
+          description: Successful transfer response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseDto'
+  /audit/logs:
+    get:
+      summary: Get transaction logs by transaction type
+      security:
+        - bearerAuth: []
+      tags:
+        - Audit
+      parameters:
+        - in: query
+          name: transactionType
+          schema:
+            type: string
+          required: true
+          description: The type of transaction logs to retrieve
+      responses:
+        '200':
+          description: A list of transaction logs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+  schemas:
+    CustomerDto:
+      type: object
+      properties:
+        customerId:
+          type: string
+    AccountDto:
+      type: object
+      properties:
+        fromAccountNumber:
+          type: string
+        toAccountNumber:
+          type: string
+        amount:
+          type: number
+          format: double
+        cardType:
+          type: string
+    ResponseDto:
+      type: object
+      properties:
+        message:
+          type: string
+        status:
+          type: integer
+        httpStatus:
+          type: string
