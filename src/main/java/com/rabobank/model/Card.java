@@ -18,30 +18,49 @@ import lombok.Data;
 @Entity
 public class Card {
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id; 
-	private String cardNumber; 
-	private LocalDate expiryDate; 
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	private String cardNumber;
+	private LocalDate expiryDate;
 	@Enumerated(EnumType.STRING)
 	private CardType cardType; // enum for DEBIT, CREDIT
 	@ManyToOne
-    @JoinColumn(name = "account_id", nullable = false)
-    private Account account;
+	@JoinColumn(name = "account_id", nullable = false)
+	private Account account;
+
 	public Long getId() {
 		return id;
 	}
+
 	public String getCardNumber() {
 		return cardNumber;
 	}
+
 	public LocalDate getExpiryDate() {
 		return expiryDate;
 	}
+
 	public CardType getCardType() {
 		return cardType;
 	}
+
 	public Account getAccount() {
 		return account;
 	}
-	
-	
+
+	public void setCardNumber(String cardNumber) {
+		this.cardNumber=cardNumber;
+		
+	}
+
+	public void setAccount(Account account2) {
+		this.account = account2;
+		
+	}
+
+	public void setCardType(CardType cardType) {
+		this.cardType = cardType;
+		
+	}
+
 }

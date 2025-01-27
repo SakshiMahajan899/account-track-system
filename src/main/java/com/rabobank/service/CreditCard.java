@@ -1,12 +1,12 @@
 /**
- * 
+ *
  */
 package com.rabobank.service;
 
 import java.math.BigDecimal;
 
 /**
- * 
+ *
  */
 public class CreditCard extends PaymentMethod {
 

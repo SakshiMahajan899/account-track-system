@@ -2,47 +2,44 @@ package com.rabobank.dto;
 
 import java.math.BigDecimal;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-
 public class AccountDto {
-	
-	private Long fromAccountNumber;
-	
-    private Long toAccountNumber;
-    private BigDecimal amount;
-    private String cardType;
 
-    // Getters and setters
-    public Long getFromAccountNumber() {
-        return fromAccountNumber;
-    }
+	private String fromAccountNumber;
 
-    public void setFromAccountNumber(Long fromAccountNumber) {
-        this.fromAccountNumber = fromAccountNumber;
-    }
+	private String toAccountNumber;
+	private BigDecimal amount;
+	private String cardType;
 
-    public Long getToAccountNumber() {
-        return toAccountNumber;
-    }
+	// Getters and setters
+	public String getFromAccountNumber() {
+		return fromAccountNumber;
+	}
 
-    public void setToAccountNumber(Long toAccountNumber) {
-        this.toAccountNumber = toAccountNumber;
-    }
+	public void setFromAccountNumber(String fromAccountNumber) {
+		this.fromAccountNumber = fromAccountNumber;
+	}
 
-    public BigDecimal getAmount() {
-        return amount;
-    }
+	public String getToAccountNumber() {
+		return toAccountNumber;
+	}
 
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
-    }
+	public void setToAccountNumber(String toAccountNumber) {
+		this.toAccountNumber = toAccountNumber;
+	}
 
-    public String getCardType() {
-        return cardType;
-    }
+	public BigDecimal getAmount() {
+		return amount;
+	}
 
-    public void setCardType(String cardType) {
-        this.cardType = cardType;
-    }
+	public void setAmount(BigDecimal amount) {
+		this.amount = amount;
+	}
+
+	public String getCardType() {
+		return cardType;
+	}
+
+	public void setCardType(String cardType) {
+		this.cardType = cardType;
+	}
 }

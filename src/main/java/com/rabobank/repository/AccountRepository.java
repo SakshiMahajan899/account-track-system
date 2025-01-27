@@ -8,10 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import com.rabobank.model.Account;
 
-
 @Repository
-public interface AccountRepository extends JpaRepository<Account, Long>{
-	
-	
-	 List<Account> findByCustomer_Id(Long customerId);
+public interface AccountRepository extends JpaRepository<Account, String> {
+
+	List<Account> findByCustomer_Id(Long customerId);
 }
