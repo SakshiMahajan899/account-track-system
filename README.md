@@ -59,6 +59,7 @@ To secure the Application endpoints, keystore.p12 is placed in the resources fol
    - Bank Application will act as resource server and owner .
    - Authorization server consulted by Resource servers to authorize requests.
    - Two Clients are onboarded in the **Oauth-authorization-server Application** one is **User** and Other is **Admin** .
+RBAC Implementation
    - For **Client-id** - user ,**scopes** defined are **"user.read"** and **"user.write"**.
    - If token is generated using **scope** **"user.read"**, then user is only **authorize** for calling **getTansaction** API.
    - If token is generated using **scope** **"user.write"**  then user is **authorize** for **withdraw** and **transfer** operations.
