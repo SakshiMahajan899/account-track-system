@@ -60,6 +60,15 @@ To secure the Application endpoints, keystore.p12 is placed in the resources fol
    - Below diagram shows how authentication and authorization works in Bank application
      ![Untitled ss drawio](https://github.com/user-attachments/assets/6d00646a-b50f-4535-ac3b-db87ab1cc783)
 
+## Design Pattern
+
+- Singleton Pattern: for Used the Database.
+- Factory Pattern: Used for creating different card types (Debit or Credit) based on user input.
+- Observer Pattern: Used for auditing transactions (i.e., when a transaction is made, the audit log is updated).
+
+## Connection Polling
+Connection pooling is used to manage database connections . Instead of opening and closing a new database connection every time an application needs to interact with the database (which can be resource-intensive), connection pooling allows the application to reuse existing database connections from a pool. 
+
 
  
 
@@ -158,7 +167,6 @@ All Request is https enabled and Authorization token is provided in the Header p
     "Timestamp: 1738021942151 |Withdrawn 37 from 5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5 "
   ]
 
-![image](https://github.com/user-attachments/assets/0d049d9f-1a69-47c3-84d8-214b6190c724)
 
 
 
