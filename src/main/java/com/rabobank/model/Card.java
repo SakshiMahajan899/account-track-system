@@ -14,53 +14,64 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.Data;
 
+import lombok.Data;
+
+import javax.persistence.*;
+import java.time.LocalDate;
+
+/**
+ * Represents a bank card entity associated with an account.
+ * This class is mapped to the `Card` table in the database and contains information
+ * related to a bank card, such as the card number, expiry date, card type, and the
+ * associated account.
+ * 
+ * The `@Data` annotation from Lombok automatically generates getters, setters, 
+ * `toString()`, `equals()`, and `hashCode()` methods for the fields.
+ * The `@Entity` annotation marks the class as a JPA entity, meaning it will be mapped to a database table.
+ */
 @Data
 @Entity
 public class Card {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	private String cardNumber;
-	private LocalDate expiryDate;
-	@Enumerated(EnumType.STRING)
-	private CardType cardType; // enum for DEBIT, CREDIT
-	@ManyToOne
-	@JoinColumn(name = "account_id", nullable = false)
-	private Account account;
 
-	public Long getId() {
-		return id;
-	}
+    /**
+     * The unique identifier for the card.
+     * This field represents the card's primary key in the database, which is generated
+     * automatically using the `@GeneratedValue` annotation with the `GenerationType.IDENTITY`
+     * strategy.
+     */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	public String getCardNumber() {
-		return cardNumber;
-	}
+    /**
+     * The card number associated with the bank card.
+     * This field stores the unique card number that identifies the card in the system.
+     */
+    private String cardNumber;
 
-	public LocalDate getExpiryDate() {
-		return expiryDate;
-	}
+    /**
+     * The expiry date of the card.
+     * This field stores the expiration date of the card, typically in `MM/YYYY` format.
+     */
+    private LocalDate expiryDate;
 
-	public CardType getCardType() {
-		return cardType;
-	}
+    /**
+     * The type of the card (e.g., DEBIT, CREDIT).
+     * This field uses the `@Enumerated(EnumType.STRING)` annotation to store the card type
+     * as a string value (e.g., "DEBIT", "CREDIT") in the database.
+     */
+    @Enumerated(EnumType.STRING)
+    private CardType cardType;
 
-	public Account getAccount() {
-		return account;
-	}
-
-	public void setCardNumber(String cardNumber) {
-		this.cardNumber=cardNumber;
-		
-	}
-
-	public void setAccount(Account account2) {
-		this.account = account2;
-		
-	}
-
-	public void setCardType(CardType cardType) {
-		this.cardType = cardType;
-		
-	}
-
+    /**
+     * The account associated with this card.
+     * This is a many-to-one relationship, where many cards can be associated with a single account.
+     * The `@ManyToOne` annotation defines this relationship, and the `@JoinColumn` annotation
+     * specifies the foreign key column (`account_id`) in the `Card` table that links to the `Account` entity.
+     * The `nullable = false` ensures that every card must be linked to an account.
+     */
+    @ManyToOne
+    @JoinColumn(name = "account_id", nullable = false)
+    private Account account;
 }
+

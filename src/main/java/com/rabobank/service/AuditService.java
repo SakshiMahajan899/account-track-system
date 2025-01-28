@@ -20,28 +20,17 @@ public class AuditService {
 
 	public static void logTransaction(String transactionType, String logMessage) {
 		// Check if the key already exists in the map
-		if (transactionMap.containsKey(transactionType)) {
-			// Add the transaction to the existing list
-			transactionMap.get(transactionType).add(logMessage);
-		} else {
-			// Create a new list for the key and add the transaction
-			List<String> transactions = new ArrayList<>();
-			transactions.add(logMessage);
-			transactionMap.put(transactionType, transactions);
-		}
+		transactionMap
+	    .computeIfAbsent(transactionType, k -> new ArrayList<>())
+	    .add(logMessage);
+
 	}
 
 	public static void logTransactionError(String transactionType, String logMessage) {
-		// Check if the key already exists in the map
-		if (transactionMap.containsKey(transactionType)) {
-			// Add the transaction to the existing list
-			transactionMap.get(transactionType).add(logMessage);
-		} else {
-			// Create a new list for the key and add the transaction
-			List<String> transactions = new ArrayList<>();
-			transactions.add(logMessage);
-			transactionMap.put(transactionType, transactions);
-		}
+		transactionMap
+	    .computeIfAbsent(transactionType, k -> new ArrayList<>())
+	    .add(logMessage);
+
 	}
 
 	public static List<String> getTransactionLogs(String transactionType) {
@@ -49,7 +38,6 @@ public class AuditService {
 	}
 
 	public static Map<String, List<String>> getTransactionMap() {
-		// TODO Auto-generated method stub
 		return transactionMap;
 	}
 }

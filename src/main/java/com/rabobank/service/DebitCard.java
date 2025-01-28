@@ -5,9 +5,7 @@ package com.rabobank.service;
 
 import java.math.BigDecimal;
 
-/**
- *
- */
+
 public class DebitCard extends PaymentMethod {
 
 	@Override

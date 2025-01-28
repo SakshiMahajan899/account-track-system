@@ -18,7 +18,9 @@ import com.rabobank.service.AuditService;
 @RequestMapping("/api/accounts/audit")
 @EnableMethodSecurity
 public class AuditController {
+	
 	// Endpoint to get transaction logs
+	
 	@GetMapping("/logs")
 	@PreAuthorize("hasAuthority('SCOPE_admin.audit')")
 	public List<String> getTransactionLogs(@RequestParam String transactionType) {

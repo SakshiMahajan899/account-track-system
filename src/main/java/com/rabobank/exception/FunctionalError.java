@@ -1,8 +1,13 @@
 package com.rabobank.exception;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
 /**
  * Representing error messages and their corresponding error codes.
  */
+@RequiredArgsConstructor
+@Getter
 public enum FunctionalError {
 
 	INVALID_CARD_TYPE("FUN_ERR_001", "Invalid card type"), INVALID_AMOUNT("ERR_002", "Invalid amount"),
@@ -13,32 +18,6 @@ public enum FunctionalError {
 	private final String code;
 	private final String errorMessage;
 
-	/**
-	 * Constructor for FunctionalErrorMessage enum.
-	 *
-	 * @param errorCode    the error code
-	 * @param errorMessage the error message
-	 */
-	FunctionalError(String errorCode, String errorMessage) {
-		this.code = errorCode;
-		this.errorMessage = errorMessage;
-	}
 
-	/**
-	 * Gets the error code.
-	 *
-	 * @return the error code
-	 */
-	public String getErrorCode() {
-		return code;
-	}
-
-	/**
-	 * Gets the error message.
-	 *
-	 * @return the error message
-	 */
-	public String getErrorMessage() {
-		return errorMessage;
-	}
+	
 }

@@ -13,6 +13,13 @@ spring:
     driverClassName: org.h2.Driver
     username: sa
     password: password
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      idle-timeout: 30000
+      pool-name: H2HikariCP
+      max-lifetime: 600000
+      connection-timeout: 30000
 
   h2:
     console:
@@ -26,3 +33,9 @@ server:
   port: 8081
         
   
+  # Configure SSL
+  ssl:
+    key-store: classpath:keystore.p12
+    key-store-password: "$2a$12$V/vMHom7B71tk7WFU2k1l.p.iNMmIVVP/nS.5xktfI4kJLNrmsJvy"
+    key-store-type: PKCS12
+    key-alias: mykey  

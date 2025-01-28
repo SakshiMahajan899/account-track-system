@@ -6,7 +6,7 @@ package com.rabobank.service;
 import java.math.BigDecimal;
 
 /**
- *
+ * CreditCardStrategy 
  */
 public class CreditCard extends PaymentMethod {
 
