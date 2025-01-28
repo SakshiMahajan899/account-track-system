@@ -17,14 +17,18 @@ import com.rabobank.dto.CustomerDto;
 import com.rabobank.dto.ResponseDto;
 import com.rabobank.service.AccountService;
 import com.rabobank.service.AuditService;
+import com.rabobank.util.BankUtil;
 import com.rabobank.util.Constants;
 import com.rabobank.validator.AccountValidator;
 import com.rabobank.validator.CustomerValidator;
+
+import lombok.RequiredArgsConstructor;
 
 /**
  * REST controller for managing account operations.
  */
 @RestController
+@RequiredArgsConstructor
 @RequestMapping(Constants.API_ACCOUNTS)
 @EnableMethodSecurity
 public class AccountController {
@@ -33,17 +37,6 @@ public class AccountController {
 	private final AccountValidator accountValidator;
 	private final CustomerValidator customerValidator;
 
-	/**
-	 * Constructor to initialize AccountController with necessary dependencies.
-	 *
-	 * @param accountService the account service to handle business logic
-	 */
-	public AccountController(AccountService accountService, AccountValidator accountValidator,
-			CustomerValidator customerValidator) {
-		this.accountService = accountService;
-		this.accountValidator = accountValidator;
-		this.customerValidator = customerValidator;
-	}
 
 	/**
 	 * Operation to get the balance for all accounts of a given customer.
@@ -69,8 +62,8 @@ public class AccountController {
 	public ResponseEntity<ResponseDto> withdraw(@RequestBody AccountDto accountDto) {
 		accountValidator.validateWithdrawRequest(accountDto);
 		accountService.withdraw(accountDto.getFromAccountNumber(), accountDto.getAmount(), accountDto.getCardType());
-		AuditService.logTransaction(Constants.WITHDRAW, String.format("Withdrawn %s from account %s",
-				accountDto.getAmount(), accountDto.getFromAccountNumber()));
+		AuditService.logTransaction(Constants.WITHDRAW, String.format("Timestamp: %s |Withdrawn %s from account %s",
+				 System.currentTimeMillis(),accountDto.getAmount(), BankUtil.hash(accountDto.getFromAccountNumber())));
 
 		ResponseDto responseDto = new ResponseDto("Withdraw Done", 200, HttpStatus.OK);
 		return new ResponseEntity<>(responseDto, HttpStatus.OK);
@@ -90,8 +83,8 @@ public class AccountController {
 		accountValidator.validateTransferRequest(accountDto);
 		accountService.transfer(accountDto.getFromAccountNumber(), accountDto.getToAccountNumber(),
 				accountDto.getAmount(), accountDto.getCardType());
-		AuditService.logTransaction(Constants.TRANSFER, String.format("Transferred %s from %s to %s",
-				accountDto.getAmount(), accountDto.getFromAccountNumber(), accountDto.getToAccountNumber()));
+		AuditService.logTransaction(Constants.TRANSFER, String.format("Timestamp: %s |Transferred %s from %s to %s",
+				 System.currentTimeMillis(),accountDto.getAmount(), BankUtil.hash(accountDto.getFromAccountNumber()), BankUtil.hash(accountDto.getToAccountNumber())));
 		ResponseDto responseDto = new ResponseDto("Transfer Done", 200, HttpStatus.OK);
 		return new ResponseEntity<>(responseDto, HttpStatus.OK);
 	}

@@ -2,38 +2,41 @@ package com.rabobank.exception;
 
 import org.springframework.http.HttpStatus;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import org.springframework.http.HttpStatus;
+
+/**
+ * ErrorResponse represents the structure of an error response returned by the application.
+ * This class is used to encapsulate details about an error, including the error code, 
+ * HTTP status, and a descriptive message.
+ * 
+ * The `@Data` annotation from Lombok automatically generates getters, setters,
+ * toString(), equals(), and hashCode() methods for all fields.
+ * The `@AllArgsConstructor` annotation generates a constructor with arguments for all fields.
+ */
+@Data
+@AllArgsConstructor
 public class ErrorResponse {
-	private String code;
-	private HttpStatus status;
-	private String message;
 
-	public ErrorResponse(String errorCode, HttpStatus status, String message) {
-		this.code = errorCode;
-		this.status = status;
-		this.message = message;
-	}
+    /**
+     * The error code associated with the error response.
+     * This can be a custom code to represent specific types of errors.
+     */
+    private String code;
 
-	public String getErrorCode() {
-		return code;
-	}
+    /**
+     * The HTTP status associated with the error response.
+     * This indicates the HTTP status code that reflects the error (e.g., 404 for Not Found, 500 for Internal Server Error).
+     */
+    private HttpStatus status;
 
-	public void setErrorCode(String errorCode) {
-		this.code = errorCode;
-	}
-
-	public HttpStatus getStatus() {
-		return status;
-	}
-
-	public void setStatus(HttpStatus status) {
-		this.status = status;
-	}
-
-	public String getMessage() {
-		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
-	}
+    /**
+     * A descriptive message providing details about the error.
+     * This message will be shown to the user or logged for debugging purposes.
+     */
+    private String message;
 }
