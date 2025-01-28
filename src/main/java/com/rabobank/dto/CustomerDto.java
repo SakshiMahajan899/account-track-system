@@ -2,8 +2,6 @@ package com.rabobank.dto;
 
 import lombok.Data;
 
-import lombok.Data;
-
 /**
  * Data Transfer Object (DTO) representing a customer.
  * This DTO is used to transfer customer data, specifically the customer ID.
