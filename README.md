@@ -58,15 +58,10 @@ To secure the Application endpoints, keystore.p12 is placed in the resources fol
    - Bank Application will act as resource server and owner .
    - Authorization server consulted by Resource servers to authorize requests.
    - Two Clients are onboarded in the BankApplication one is User and Other is Admin .
-     For Client-id - user
-                   scopes:
-                - "user.read"
-                - "user.write"
-         If token is generated using scope **"user.read" ** then user is only authorize for calling getTansaction API
-         If token is generated using scope "user.write"  then user is authorize for withdraw and transfer operations.
-     For Client-id - admin
-                 scopes:
-                - "admin.audit" so admin is authorize for auditing of transaction of type WITHDRAW/TRANSFER
+   - For Client-id - user ,scopes defined are "user.read" and "user.write".
+   - If token is generated using scope "user.read", then user is only authorize for calling getTansaction API.
+   - If token is generated using scope "user.write"  then user is authorize for withdraw and transfer operations.
+   - For Client-id - admin, scopes defined are "admin.audit" so admin is authorize for auditing of transaction of type                 WITHDRAW/TRANSFER
    - Below diagram shows how authentication and authorization works in Bank application
      ![Untitled ss drawio](https://github.com/user-attachments/assets/6d00646a-b50f-4535-ac3b-db87ab1cc783)
 
