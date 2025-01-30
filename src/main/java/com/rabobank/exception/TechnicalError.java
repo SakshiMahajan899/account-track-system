@@ -1,6 +1,6 @@
 package com.rabobank.exception;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 /**
@@ -16,7 +16,7 @@ import lombok.RequiredArgsConstructor;
  * for all final fields.
  */
 @RequiredArgsConstructor
-@Data
+@Getter
 public enum TechnicalError {
 
     /**

@@ -18,12 +18,9 @@ import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import com.rabobank.exception.FunctionalException;
 import com.rabobank.exception.TechnicalException;
@@ -133,7 +130,7 @@ public class AccountServiceTest {
         String accountNumber = "12345";
         BigDecimal amount = BigDecimal.valueOf(200);
         String cardType = "DEBIT";
-        when(accountRepository.findById(accountNumber)).thenThrow(new TechnicalException("Database error"));
+        when(accountRepository.findById(accountNumber)).thenThrow(new TechnicalException("123","Database error"));
 
         // Act & Assert
         TechnicalException exception = assertThrows(TechnicalException.class, () -> accountService.withdraw(accountNumber, amount, cardType));
@@ -192,7 +189,7 @@ public class AccountServiceTest {
         String toAccountNumber = "67890";
         BigDecimal amount = BigDecimal.valueOf(200);
         String cardType = "DEBIT";
-        when(accountRepository.findById(fromAccountNumber)).thenThrow(new TechnicalException("Database error"));
+        when(accountRepository.findById(fromAccountNumber)).thenThrow(new TechnicalException("123","Database error"));
 
         // Act & Assert
         TechnicalException exception = assertThrows(TechnicalException.class, () -> accountService.transfer(fromAccountNumber, toAccountNumber, amount, cardType));

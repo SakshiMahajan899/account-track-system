@@ -50,7 +50,7 @@ public class AccountValidator {
 	public void validateCardType(String cardType) {
 		if (StringUtils.isBlank(cardType)
 				|| !StringUtils.equalsAny(cardType, CardType.CREDIT.name(), CardType.DEBIT.name())) {
-			throw new FunctionalException(FunctionalError.INVALID_CARD_TYPE.getErrorCode(),
+			throw new FunctionalException(FunctionalError.INVALID_CARD_TYPE.getCode(),
 					FunctionalError.INVALID_CARD_TYPE.getErrorMessage());
 		}
 	}
@@ -64,7 +64,7 @@ public class AccountValidator {
 	 */
 	public void validateAmount(BigDecimal amount) {
 		if (amount == null || amount.compareTo(BigDecimal.ZERO) <= 0) {
-			throw new FunctionalException(FunctionalError.INVALID_AMOUNT.getErrorCode(),
+			throw new FunctionalException(FunctionalError.INVALID_AMOUNT.getCode(),
 					FunctionalError.INVALID_AMOUNT.getErrorMessage());
 		}
 	}
@@ -77,7 +77,7 @@ public class AccountValidator {
 	 */
 	public void validateAccountNumber(String accountNumber) {
 		if (StringUtils.isBlank(accountNumber)) {
-			throw new FunctionalException(FunctionalError.INVALID_ACCOUNT_NUMBER.getErrorCode(),
+			throw new FunctionalException(FunctionalError.INVALID_ACCOUNT_NUMBER.getCode(),
 					FunctionalError.INVALID_ACCOUNT_NUMBER.getErrorMessage());
 		}
 	}

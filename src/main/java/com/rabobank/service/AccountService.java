@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.rabobank.exception.FunctionalError;
 import com.rabobank.exception.FunctionalException;
-import com.rabobank.exception.TechnicalError;
 import com.rabobank.exception.TechnicalException;
 import com.rabobank.model.Account;
 import com.rabobank.repository.AccountRepository;
@@ -40,11 +39,12 @@ public class AccountService {
      * @throws FunctionalException if no accounts are found for the given customer
      *                             ID
      */
+    @Transactional(readOnly = true)
     public Map<String, BigDecimal> getBalance(Long customerId) {
         List<Account> accountList = accountRepository.findByCustomer_Id(customerId);
 
         if (ObjectUtils.isEmpty(accountList)) {
-            throw new FunctionalException(FunctionalError.ACCOUNT_NOT_FOUND.getErrorCode(),
+            throw new FunctionalException(FunctionalError.ACCOUNT_NOT_FOUND.getCode(),
                     "No accounts found for customer ID: " + customerId);
         }
 
@@ -116,7 +116,7 @@ public class AccountService {
         if (account.getBalance().compareTo(totalAmount) < 0) {
             String errorMsg = String.format("Insufficient balance. Requested: %s, Available: %s", totalAmount, account.getBalance());
             logTransactionError(action, errorMsg, account.getAccountNumber());
-            throw new FunctionalException(FunctionalError.INSUFFICIENT_BALANCE.getErrorCode(), FunctionalError.INSUFFICIENT_BALANCE.getErrorMessage());
+            throw new FunctionalException(FunctionalError.INSUFFICIENT_BALANCE.getCode(), FunctionalError.INSUFFICIENT_BALANCE.getErrorMessage());
         }
     }
 
@@ -129,7 +129,7 @@ public class AccountService {
      */
     private Account findAccountByNumber(String accountNumber) {
         return accountRepository.findById(accountNumber)
-                .orElseThrow(() -> new FunctionalException(FunctionalError.ACCOUNT_NOT_FOUND.getErrorCode(),
+                .orElseThrow(() -> new FunctionalException(FunctionalError.ACCOUNT_NOT_FOUND.getCode(),
                         FunctionalError.ACCOUNT_NOT_FOUND.getErrorMessage()));
     }
 
@@ -141,9 +141,9 @@ public class AccountService {
      * @param accountNumber the account number associated with the transaction
      */
     private void logTransactionError(String action, String errorMessage, String accountNumber) {
-        AuditService.logTransactionError(action,
+        AuditService.logTransaction(action,
                 String.format("Timestamp: %s | %s error during %s | Account: %s | %s",
-                        System.currentTimeMillis(), FunctionalError.INSUFFICIENT_BALANCE.getErrorCode(),
+                        System.currentTimeMillis(), FunctionalError.INSUFFICIENT_BALANCE.getCode(),
                         action, BankUtil.hash(accountNumber), errorMessage));
     }
 }

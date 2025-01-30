@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Configuration
 @Data
-@PropertySource("classpath:application.yml")
+@PropertySource("classpath:application.yaml")
 public class DatabaseConfig {
 	@Value("${spring.datasource.url}")
     private String jdbcUrl;

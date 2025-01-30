@@ -39,7 +39,7 @@ public class CardFeeCalculator {
 		case "DEBIT":
 			return new DebitCard();
 		default:
-			throw new FunctionalException(FunctionalError.INVALID_CARD_TYPE.getErrorCode(),
+			throw new FunctionalException(FunctionalError.INVALID_CARD_TYPE.getCode(),
 					FunctionalError.INVALID_CARD_TYPE.getErrorMessage() + " " + cardType);
 		}
 	}

@@ -8,11 +8,12 @@ import lombok.Data;
 /**
  * DTO for account transaction responses.
  */
-@Data
 @AllArgsConstructor
+@Data
 public class ResponseDto {
+	
+	private String message;
 	private int code;
 	private HttpStatus status;
-	private String message;
 
 }

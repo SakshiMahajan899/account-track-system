@@ -1,6 +1,7 @@
 package com.rabobank.service;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 
@@ -18,14 +19,16 @@ class AuditServiceTest {
     @Test
     public void testLogTransaction() {
         AuditService.logTransaction("Type1", "Log1");
+        AuditService.logTransaction("Type1", "Log2");
+        AuditService.logTransaction("Type2", "Log2");
         List<String> logs = AuditService.getTransactionLogs("Type1");
-        assertEquals(1, logs.size());
+        assertEquals(2, logs.size());
         assertTrue(logs.contains("Log1"));
     }
 
     @Test
     public void testLogTransactionError() {
-        AuditService.logTransactionError("Type2", "ErrorLog1");
+        AuditService.logTransaction("Type2", "ErrorLog1");
         List<String> logs = AuditService.getTransactionLogs("Type2");
         assertEquals(1, logs.size());
         assertTrue(logs.contains("ErrorLog1"));

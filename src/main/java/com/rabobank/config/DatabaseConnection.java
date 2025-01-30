@@ -1,14 +1,13 @@
 package com.rabobank.config;
 
+import javax.sql.DataSource;
+
+import org.springframework.context.annotation.Configuration;
+
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 import lombok.RequiredArgsConstructor;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
-
-import javax.sql.DataSource;
 
 @Configuration
 @RequiredArgsConstructor
@@ -22,6 +21,7 @@ public class DatabaseConnection {
 
     private DatabaseConnection() {
         HikariConfig config = new HikariConfig();
+		this.databaseConfig = new DatabaseConfig();
         config.setJdbcUrl(databaseConfig.getJdbcUrl());
         config.setUsername(databaseConfig.getUsername());
         config.setPassword(databaseConfig.getPassword());

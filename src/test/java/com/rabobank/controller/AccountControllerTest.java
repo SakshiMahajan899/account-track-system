@@ -1,32 +1,20 @@
 package com.rabobank.controller;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -35,16 +23,9 @@ import com.rabobank.dto.CustomerDto;
 import com.rabobank.dto.ResponseDto;
 import com.rabobank.exception.FunctionalError;
 import com.rabobank.exception.FunctionalException;
-import com.rabobank.exception.TechnicalException;
-import com.rabobank.model.Account;
-import com.rabobank.model.Card;
-import com.rabobank.repository.AccountRepository;
 import com.rabobank.service.AccountService;
-import com.rabobank.util.CardType;
 import com.rabobank.validator.AccountValidator;
 import com.rabobank.validator.CustomerValidator;
-
-import org.junit.jupiter.api.Test;
 
 
 class AccountControllerTest {
@@ -121,7 +102,7 @@ class AccountControllerTest {
         CustomerDto customerDto = new CustomerDto();
         customerDto.setCustomerId(-1L); // Invalid customer ID
 
-        doThrow(new FunctionalException(FunctionalError.INVALID_CUSTOMER_ID.getErrorCode(),"Invalid customer ID")).when(customerValidator).validateCustomerId(customerDto.getCustomerId());
+        doThrow(new FunctionalException(FunctionalError.INVALID_CUSTOMER_ID.getCode(),"Invalid customer ID")).when(customerValidator).validateCustomerId(customerDto.getCustomerId());
 
         try {
             accountController.getBalance(customerDto);
@@ -137,7 +118,7 @@ class AccountControllerTest {
         accountDto.setAmount(new BigDecimal("100.00"));
         accountDto.setCardType("INVALID"); // Invalid card type
 
-        doThrow(new FunctionalException(FunctionalError.INVALID_CARD_TYPE.getErrorCode(),"Invalid card type")).when(accountValidator).validateWithdrawRequest(accountDto);
+        doThrow(new FunctionalException(FunctionalError.INVALID_CARD_TYPE.getCode(),"Invalid card type")).when(accountValidator).validateWithdrawRequest(accountDto);
 
         try {
             accountController.withdraw(accountDto);
@@ -154,7 +135,7 @@ class AccountControllerTest {
         accountDto.setAmount(new BigDecimal("200.00"));
         accountDto.setCardType("INVALID"); // Invalid card type
 
-        doThrow(new FunctionalException(FunctionalError.INVALID_CARD_TYPE.getErrorCode(),"Invalid card type")).when(accountValidator).validateTransferRequest(accountDto);
+        doThrow(new FunctionalException(FunctionalError.INVALID_CARD_TYPE.getCode(),"Invalid card type")).when(accountValidator).validateTransferRequest(accountDto);
 
         try {
             accountController.transfer(accountDto);

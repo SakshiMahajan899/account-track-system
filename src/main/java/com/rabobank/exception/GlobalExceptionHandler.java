@@ -32,7 +32,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(Unauthorized.class)
     public ResponseEntity<ErrorResponse> handleUnauthorizedException(Unauthorized ex) {
-        ErrorResponse error = new ErrorResponse(TechnicalError.UNAUTHORIZED.getErrorCode(), HttpStatus.UNAUTHORIZED,
+        ErrorResponse error = new ErrorResponse(TechnicalError.UNAUTHORIZED.getCode(), HttpStatus.UNAUTHORIZED,
                 ex.getMessage());
         return new ResponseEntity<>(error, HttpStatus.UNAUTHORIZED);
     }
@@ -46,7 +46,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(AuthorizationDeniedException.class)
     public ResponseEntity<ErrorResponse> handleAuthorizationDeniedException(AuthorizationDeniedException ex) {
-        ErrorResponse error = new ErrorResponse(TechnicalError.AUTHORIZATION_DENID.getErrorCode(), HttpStatus.FORBIDDEN,
+        ErrorResponse error = new ErrorResponse(TechnicalError.AUTHORIZATION_DENID.getCode(), HttpStatus.FORBIDDEN,
                 ex.getMessage());
         return new ResponseEntity<>(error, HttpStatus.FORBIDDEN);
     }
@@ -93,7 +93,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<ErrorResponse> handleGeneralException(IllegalArgumentException ex) {
-        ErrorResponse error = new ErrorResponse(FunctionalError.ILLEGAL_ARG.getErrorCode(), HttpStatus.BAD_REQUEST,
+        ErrorResponse error = new ErrorResponse(FunctionalError.ILLEGAL_ARG.getCode(), HttpStatus.BAD_REQUEST,
                 ex.getMessage());
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
@@ -107,7 +107,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleGeneralException(Exception ex) {
-        ErrorResponse error = new ErrorResponse(TechnicalError.EXCEPTION.getErrorCode(),
+        ErrorResponse error = new ErrorResponse(TechnicalError.EXCEPTION.getCode(),
                 HttpStatus.INTERNAL_SERVER_ERROR, "An unexpected error occurred: " + ex.getMessage());
         return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
