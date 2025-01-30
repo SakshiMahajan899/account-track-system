@@ -11,22 +11,14 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
-import lombok.Data;
 
-@Data
+
 @Service
 public class AuditService {
 	private static Map<String, List<String>> transactionMap = new HashMap<>();
 
 	public static void logTransaction(String transactionType, String logMessage) {
 		// Check if the key already exists in the map
-		transactionMap
-	    .computeIfAbsent(transactionType, k -> new ArrayList<>())
-	    .add(logMessage);
-
-	}
-
-	public static void logTransactionError(String transactionType, String logMessage) {
 		transactionMap
 	    .computeIfAbsent(transactionType, k -> new ArrayList<>())
 	    .add(logMessage);

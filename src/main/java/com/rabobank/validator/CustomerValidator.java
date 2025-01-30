@@ -20,7 +20,7 @@ public class CustomerValidator {
 	 */
 	public void validateCustomerId(Long customerId) {
 		if (customerId == null || customerId <= 0) {
-			throw new FunctionalException(FunctionalError.INVALID_CUSTOMER_ID.getErrorCode(),
+			throw new FunctionalException(FunctionalError.INVALID_CUSTOMER_ID.getCode(),
 					FunctionalError.INVALID_CUSTOMER_ID.getErrorMessage());
 		}
 	}

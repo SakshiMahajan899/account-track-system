@@ -1,7 +1,7 @@
 package com.rabobank.exception;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
 
 /**
  * Custom exception class to represent TechnicalException errors with an error
@@ -12,7 +12,7 @@ import lombok.RequiredArgsConstructor;
  * as well as a detailed error message.
  * </p>
  */
-@RequiredArgsConstructor
+@AllArgsConstructor
 @Data
 public class TechnicalException extends RuntimeException {
 
@@ -21,6 +21,6 @@ public class TechnicalException extends RuntimeException {
 	 */
 	private static final long serialVersionUID = 1L;
 	private String errorCode;
-	private String message
+	private String message;
 	
 }

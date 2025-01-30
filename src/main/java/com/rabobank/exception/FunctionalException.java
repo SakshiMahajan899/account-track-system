@@ -1,7 +1,7 @@
 package com.rabobank.exception;
 
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 /**
  * Custom exception class to represent functional errors with an error code and
@@ -12,8 +12,8 @@ import lombok.RequiredArgsConstructor;
  * well as a detailed error message.
  * </p>
  */
-@RequiredArgsConstructor
-@Data
+@AllArgsConstructor
+@Getter
 public class FunctionalException extends RuntimeException {
 
 	/**

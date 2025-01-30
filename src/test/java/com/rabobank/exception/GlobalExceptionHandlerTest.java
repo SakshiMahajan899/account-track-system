@@ -1,13 +1,12 @@
 package com.rabobank.exception;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authorization.AuthorizationDeniedException;
-import org.springframework.web.client.HttpClientErrorException.Unauthorized;
 
 class GlobalExceptionHandlerTest {
 
@@ -26,29 +25,29 @@ class GlobalExceptionHandlerTest {
 	        ResponseEntity<ErrorResponse> response = exceptionHandler.handleAuthorizationDeniedException(exception);
 	        
 	        assertEquals(HttpStatus.FORBIDDEN, response.getStatusCode());
-	        assertEquals(TechnicalError.AUTHORIZATION_DENID.getErrorCode(), response.getBody().getErrorCode());
+	        assertEquals(TechnicalError.AUTHORIZATION_DENID.getCode(), response.getBody().getCode());
 	        assertEquals("Authorization denied", response.getBody().getMessage());
 	    }
 
 	    @Test
 	    public void shouldReturnBadRequestError_whenFunctionalExceptionIsThrown() {
-	        FunctionalException exception = new FunctionalException(FunctionalError.INVALID_CUSTOMER_ID.getErrorCode(),
+	        FunctionalException exception = new FunctionalException(FunctionalError.INVALID_CUSTOMER_ID.getCode(),
 	                                                                FunctionalError.INVALID_CUSTOMER_ID.getErrorMessage());
 	        ResponseEntity<ErrorResponse> response = exceptionHandler.handleFunctionalException(exception);
 	        
 	        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
-	        assertEquals(FunctionalError.INVALID_CUSTOMER_ID.getErrorCode(), response.getBody().getErrorCode());
+	        assertEquals(FunctionalError.INVALID_CUSTOMER_ID.getCode(), response.getBody().getCode());
 	        assertEquals(FunctionalError.INVALID_CUSTOMER_ID.getErrorMessage(), response.getBody().getMessage());
 	    }
 
 	    @Test
 	    public void shouldReturnInternalServerError_whenTechnicalExceptionIsThrown() {
-	        TechnicalException exception = new TechnicalException(TechnicalError.EXCEPTION.getErrorCode(),
+	        FunctionalException exception = new FunctionalException(TechnicalError.EXCEPTION.getCode(),
 	                                                               TechnicalError.EXCEPTION.getErrorMessage());
 	        ResponseEntity<ErrorResponse> response = exceptionHandler.handleFunctionalException(exception);
 	        
 
-	        assertEquals(TechnicalError.EXCEPTION.getErrorCode(), response.getBody().getErrorCode());
+	        assertEquals(TechnicalError.EXCEPTION.getCode(), response.getBody().getCode());
 	        assertEquals(TechnicalError.EXCEPTION.getErrorMessage(), response.getBody().getMessage());
 	    }
 
@@ -58,7 +57,7 @@ class GlobalExceptionHandlerTest {
 	        ResponseEntity<ErrorResponse> response = exceptionHandler.handleGeneralException(exception);
 	        
 	        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
-	        assertEquals(FunctionalError.ILLEGAL_ARG.getErrorCode(), response.getBody().getErrorCode());
+	        assertEquals(FunctionalError.ILLEGAL_ARG.getCode(), response.getBody().getCode());
 	        assertEquals("Invalid argument", response.getBody().getMessage());
 	    }
 
@@ -68,7 +67,7 @@ class GlobalExceptionHandlerTest {
 	        ResponseEntity<ErrorResponse> response = exceptionHandler.handleGeneralException(exception);
 	        
 	        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
-	        assertEquals(TechnicalError.EXCEPTION.getErrorCode(), response.getBody().getErrorCode());
+	        assertEquals(TechnicalError.EXCEPTION.getCode(), response.getBody().getCode());
 	        assertEquals("An unexpected error occurred: General error", response.getBody().getMessage());
 	    }
 

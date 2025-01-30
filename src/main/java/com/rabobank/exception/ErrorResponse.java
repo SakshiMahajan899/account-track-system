@@ -5,10 +5,6 @@ import org.springframework.http.HttpStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import org.springframework.http.HttpStatus;
-
 /**
  * ErrorResponse represents the structure of an error response returned by the application.
  * This class is used to encapsulate details about an error, including the error code, 

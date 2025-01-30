@@ -14,10 +14,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.Data;
 
-import lombok.Data;
-
-import javax.persistence.*;
-import java.time.LocalDate;
 
 /**
  * Represents a bank card entity associated with an account.
